@@ -1,6 +1,8 @@
 #include <iostream>
 #include <cmath>
 
+using namespace std;
+
 // Definir la estructura de un punto en 2D
 struct Point {
     double x, y;
@@ -8,23 +10,23 @@ struct Point {
 
 // Función para calcular la distancia entre dos puntos (usando referencias constantes)
 double calcularDistancia(const Point& p1, const Point& p2) {
-    return std::sqrt(std::pow(p2.x - p1.x, 2) + std::pow(p2.y - p1.y, 2));
+    return sqrt(pow(p2.x - p1.x, 2) + pow(p2.y - p1.y, 2));
 }
 
 // Función para leer las coordenadas de varios puntos
 void leerPuntos(Point puntos[], int n) {
     char respuesta;
-    std::cout << "¿Desea ingresar los puntos manualmente? (s/n): ";
-    std::cin >> respuesta;
+    cout << "¿Desea ingresar los puntos manualmente? (s/n): ";
+    cin >> respuesta;
     
     if (respuesta == 's' || respuesta == 'S') {
         for (int i = 0; i < n; i++) {
-            std::cout << "Ingrese las coordenadas del punto " << i + 1 << " (x y): ";
-            std::cin >> puntos[i].x >> puntos[i].y;
+            cout << "Ingrese las coordenadas del punto " << i + 1 << " (x y): ";
+            cin >> puntos[i].x >> puntos[i].y;
         }
     } else {
         // Usar puntos predeterminados
-        std::cout << "Usando puntos predeterminados...\n";
+        cout << "Usando puntos predeterminados...\n";
         for (int i = 0; i < n; i++) {
             puntos[i] = {i * 3.0, i * 4.0}; // Ejemplo de inicialización
         }
@@ -48,8 +50,8 @@ double calcularDistanciaMasCercana(Point puntos[], int n, const Point& pUsuario,
 
 // Función para mostrar el resultado
 void mostrarResultado(Point puntos[], int indiceMasCercano, double distancia) {
-    std::cout << "El punto más cercano es: (" << puntos[indiceMasCercano].x << ", " << puntos[indiceMasCercano].y << ")\n";
-    std::cout << "La distancia al punto más cercano es: " << distancia << std::endl;
+    cout << "El punto más cercano es: (" << puntos[indiceMasCercano].x << ", " << puntos[indiceMasCercano].y << ")\n";
+    cout << "La distancia al punto más cercano es: " << distancia << endl;
 }
 
 // Función para calcular la distancia total al recorrer los puntos en orden
@@ -63,11 +65,11 @@ double calcularDistanciaTotal(Point puntos[], int n) {
 
 int main() {
     int n;
-    std::cout << "Ingrese el número de puntos (mínimo 2): ";
-    std::cin >> n;
+    cout << "Ingrese el número de puntos (mínimo 2): ";
+    cin >> n;
     
     if (n < 2) {
-        std::cout << "Se necesitan al menos 2 puntos para calcular las distancias.\n";
+        cout << "Se necesitan al menos 2 puntos para calcular las distancias.\n";
         return 1;
     }
 
@@ -75,15 +77,15 @@ int main() {
     leerPuntos(puntos, n);
     
     Point pUsuario;
-    std::cout << "Ingrese las coordenadas del punto desde el que calcular la distancia (x y): ";
-    std::cin >> pUsuario.x >> pUsuario.y;
+    cout << "Ingrese las coordenadas del punto desde el que calcular la distancia (x y): ";
+    cin >> pUsuario.x >> pUsuario.y;
 
     int indiceMasCercano;
     double distancia = calcularDistanciaMasCercana(puntos, n, pUsuario, indiceMasCercano);
     mostrarResultado(puntos, indiceMasCercano, distancia);
 
     double distanciaTotal = calcularDistanciaTotal(puntos, n);
-    std::cout << "La distancia total recorrida entre los puntos en orden es: " << distanciaTotal << std::endl;
+    cout << "La distancia total recorrida entre los puntos en orden es: " << distanciaTotal << endl;
     
     return 0;
 }
